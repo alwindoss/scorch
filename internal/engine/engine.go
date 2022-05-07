@@ -27,7 +27,7 @@ func NewRouter(cfg *scorch.Config) *mux.Router {
 }
 
 func SetupRoutes(cfg *scorch.Config, r *mux.Router, h ScorchHandler) {
-	v1Router := r.PathPrefix("/scorch/v1").Subrouter()
+	v1Router := r.PathPrefix("/scorch/api/v1").Subrouter()
 	v1Router.Path("/ping").Methods(http.MethodGet).HandlerFunc(h.Ping)
 	v1Router.Path("/install").Methods(http.MethodPost).HandlerFunc(h.Install)
 	v1Router.Path("/status").Methods(http.MethodGet).HandlerFunc(h.Status)

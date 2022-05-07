@@ -3,6 +3,7 @@ GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
+GOINSTALL=$(GOCMD) install
 BINARY_LOC=bin
 BINARY_NAME=scorch
 DOCKER_REPOSITORY_OWNER=alwindoss
@@ -16,6 +17,7 @@ package:
 publish:
 	docker push $(DOCKER_REPOSITORY_OWNER)/$(BINARY_NAME):$(VERSION)
 setup:
+	$(GOINSTALL) -v github.com/cucumber/godog/cmd/godog@latest
 	$(GOGET) -v ./...
 build:
 ifeq ($(OS),Windows_NT)
@@ -23,6 +25,8 @@ ifeq ($(OS),Windows_NT)
 else
 	$(GOBUILD) -o ./$(BINARY_LOC)/$(BINARY_NAME) -v ./cmd/$(BINARY_NAME)/...
 endif 
+component_test:
+	cd component_tests && godog run
 test: 
 	$(GOTEST) -v ./...
 clean: 
