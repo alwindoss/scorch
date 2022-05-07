@@ -1,5 +1,5 @@
 # Scorch
-**S**ecure **C**lean **Orch**estrator
+`S`ecure `C`lean `Orch`estrator
 
 ## Installation
 
